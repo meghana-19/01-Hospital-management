@@ -125,10 +125,22 @@ public class HospitalManagementSystem {
         String name = scanner.next();
         System.out.print("Enter Patient Age: ");
         int age = scanner.nextInt();
-        Patient patient = new Patient(id, name, age);
-        patients.add(patient);
-        savePatients();
-        System.out.println("Patient Added Successfully!!");
+        if(age > 0 && age <= 110)
+        {
+            Patient patient = new Patient(id, name, age);
+            patients.add(patient);
+            savePatients();
+            System.out.println("Patient Added Successfully!!");             
+        }else {
+            System.out.println("Enter correct age (age must be between 1 to 110");
+            System.out.print("Enter Patient Age: ");
+             age = scanner.nextInt();
+             Patient patient = new Patient(id, name, age);
+             patients.add(patient);
+             savePatients();
+             System.out.println("Patient Added Successfully!!");
+        }
+        
     }
 
     private static void viewPatients() {
@@ -161,11 +173,17 @@ public class HospitalManagementSystem {
         System.out.print("Enter Appointment Date (YYYY-MM-DD): ");
         String dateString = scanner.next();
         LocalDate date = LocalDate.parse(dateString);
-        Appointment appointment = new Appointment(patientId, doctorId, date);
+        if(doctorId<6 && doctorId>0){
+            Appointment appointment = new Appointment(patientId, doctorId, date);
         appointments.add(appointment);
         saveAppointments();
         System.out.println("Appointment Booked!");
+    }else { 
+        System.out.println("!!Enter correct details!!!");
     }
+        }
+        
+        
 
     private static void viewAppointments() {
         System.out.println("Appointments: ");
